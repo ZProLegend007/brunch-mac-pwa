@@ -10,10 +10,10 @@ function reboot() {
 };
 
 async function showNotification(notification_text, tabname) {
-	const title = 'Brunch PWA';
+	const title = 'Brunch-mac PWA';
 	const options = {
 		body: notification_text,
-		icon: '/brunch-pwa/images/icons/512.png',
+		icon: '/brunch-mac-pwa/images/icons/512.png',
 		data: {
 			tab: tabname,
 		}
