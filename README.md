@@ -2,4 +2,6 @@
 
 This repo is for the Brunch-mac PWA which is for updating brunch-mac.
 
-Credit to sebanc for his work building the brunch-pwa which this is based off.
+## The PWA is linked [here](https://zprolegend007.github.io/brunch-mac-pwa/)
+
+Credit to sebanc for his work building the original brunch-pwa which this is based off.
