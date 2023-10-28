@@ -27,7 +27,7 @@ window.onload = function () {
 	}
 
 	if ('serviceWorker' in navigator) {
-		navigator.serviceWorker.register('/brunch-pwa/sw.js', {scope: '/brunch-pwa/'}).then(function(reg) {
+		navigator.serviceWorker.register('/brunch-mac-pwa/sw.js', {scope: '/brunch-mac-pwa/'}).then(function(reg) {
 			console.log('Registration succeeded. Scope is ' + reg.scope);
 			periodicsync();
 		}).catch(function(error) {
