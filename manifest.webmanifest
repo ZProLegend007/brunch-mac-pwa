@@ -1,9 +1,9 @@
 {
-	"name": "Brunch PWA",
-	"short_name": "Brunch PWA",
-	"description": "A PWA to manage brunch devices",
+	"name": "Brunch-mac PWA",
+	"short_name": "Brunch-mac PWA",
+	"description": "A PWA to update brunch-mac devices",
 	"start_url": "./",
-	"scope": "/brunch-pwa/",
+	"scope": "/brunch-mac-pwa/",
 	"display": "minimal-ui",
 	"background_color": "#2A3443",
 	"theme_color": "#2A3443",
