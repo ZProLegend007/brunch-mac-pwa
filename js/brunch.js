@@ -1,16 +1,5 @@
 window.onload = function () {
 
-	if (window["WebSocket"]) {
-		ws_connect();
-		ws.onclose = function (evt) {
-			document.body.innerHTML = '<div style="direction: ltr; position: fixed; top: 0; z-index: 999999; display: block; width: 100%; height: 100%; background: #33266e"><p style="position: relative; top: 40%; display: block; font-size: 32px; font-weight: bold; color: #fff; margin: 0 auto; text-align: center">To use this feature you need to enable the brunch "pwa" option.</p></div>';
-		};
-	} else {
-		document.body.innerHTML = '<div style="direction: ltr; position: fixed; top: 0; z-index: 999999; display: block; width: 100%; height: 100%; background: #33266e"><p style="position: relative; top: 40%; display: block; font-size: 32px; font-weight: bold; color: #fff; margin: 0 auto; text-align: center">To use this feature you need to enable the brunch "pwa" option.</p></div>';
-	}
-
-	checkCookie();
-
 	window.addEventListener('appinstalled', () => {
 		window.location.reload();
 	});
@@ -90,8 +79,6 @@ window.onload = function () {
 		}
 	});
 	
-	document.getElementById("warning").innerHTML = '<b>Warning: Updating to Brunch r103 will prevent you to access your data. Make sure to backup your data before updating and to powerwash after the update.</b>';
-
 	document.getElementById("form").onsubmit = function () {
 		document.getElementById("log").style.background = "#A9A9A9";
 		log = "<center><b>Console log:</b></center><br>";
