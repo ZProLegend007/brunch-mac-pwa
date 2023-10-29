@@ -18,38 +18,25 @@ window.onload = function () {
 	async function DisplaySettings() {
 		var notifications = await getCookie("notifications");
 		var brunch_stable = await getCookie("brunch_stable");
-		var brunch_unstable = await getCookie("brunch_unstable");
 		var chromeos = await getCookie("chromeos");
 		
 		if (notifications.value == "yes") {
 			document.getElementById("intro").innerHTML = '<b>Display update notifications for:</b>';
 			if (brunch_stable.value == "yes") {
-				document.getElementById("notifications-stable").innerHTML = 'Brunch stable releases: <input type="checkbox" id="notify_stable" checked/>';
+				document.getElementById("notifications-stable").innerHTML = 'Brunch-mac updates: <input type="checkbox" id="notify_stable" checked/>';
 			} else {
-				document.getElementById("notifications-stable").innerHTML = 'Brunch stable releases: <input type="checkbox" id="notify_stable"/>';
-			};
-			if (brunch_unstable.value == "yes") {
-				document.getElementById("notifications-unstable").innerHTML = 'Brunch unstable releases: <input type="checkbox" id="notify_unstable" checked/>';
-			} else {
-				document.getElementById("notifications-unstable").innerHTML = 'Brunch unstable releases: <input type="checkbox" id="notify_unstable"/>';
+				document.getElementById("notifications-stable").innerHTML = 'Brunch-mac updates: <input type="checkbox" id="notify_stable"/>';
 			};
 			if (chromeos.value == "yes") {
-				document.getElementById("notifications-chromeos").innerHTML = 'ChromeOS recovery images: <input type="checkbox" id="notify_chromeos" checked/>';
+				document.getElementById("notifications-chromeos").innerHTML = 'ChromeOS updates: <input type="checkbox" id="notify_chromeos" checked/>';
 			} else {
-				document.getElementById("notifications-chromeos").innerHTML = 'ChromeOS recovery images: <input type="checkbox" id="notify_chromeos"/>';
+				document.getElementById("notifications-chromeos").innerHTML = 'ChromeOS updates: <input type="checkbox" id="notify_chromeos"/>';
 			};
 			document.getElementById('notify_stable').addEventListener('change', (event) => {
 				if (event.currentTarget.checked) {
 					setCookie("brunch_stable","yes");
 				} else {
 					setCookie("brunch_stable","no");
-				}
-			})
-			document.getElementById('notify_unstable').addEventListener('change', (event) => {
-				if (event.currentTarget.checked) {
-					setCookie("brunch_unstable","yes");
-				} else {
-					setCookie("brunch_unstable","no");
 				}
 			})
 			document.getElementById('notify_chromeos').addEventListener('change', (event) => {
