@@ -15,25 +15,5 @@
 		"src": "images/icons/96.png",
 		"sizes": "96x96",
 		"type": "image/png"
-	}, {
-		"src": "images/icons/144.png",
-		"sizes": "any",
-		"type": "image/png"
-	}, {
-		"src": "images/icons/192.png",
-		"sizes": "any",
-		"type": "image/png"
-	}, {
-		"src": "images/icons/256.png",
-		"sizes": "any",
-		"type": "image/png"
-	}, {
-		"src": "images/icons/384.png",
-		"sizes": "any",
-		"type": "image/png"
-	}, {
-		"src": "images/icons/512.png",
-		"sizes": "any",
-		"type": "image/png"
 	}]
 }
