@@ -24,14 +24,10 @@ async function eraseCookie(name) {
 
 async function checkCookie() {
 	var brunch_stable = await getCookie("brunch_stable");
-	var brunch_unstable = await getCookie("brunch_unstable");
 	var chromeos = await getCookie("chromeos");
 	var notifications = await getCookie("notifications");
 	if (!brunch_stable) {
 		setCookie("brunch_stable", "yes");
-	}
-	if (!brunch_unstable) {
-		setCookie("brunch_unstable", "no");
 	}
 	if (!chromeos) {
 		setCookie("chromeos", "no");
