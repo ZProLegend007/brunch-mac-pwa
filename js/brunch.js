@@ -60,7 +60,7 @@ window.onload = function () {
 					document.getElementById("brunch-mac-version").innerHTML = '<b>Installed Brunch-mac:</b><br>'+cookie.value;
 					break;
 				  case "latest_stable":
-					document.getElementById("latest").innerHTML = '<b>Latest Brunch-mac:</b><br>'+cookie.value+'<br> ;
+					document.getElementById("latest").innerHTML = '<b>Latest Brunch-mac:</b><br>'+cookie.value+'<br>=> <a href="https://github.com/zprolegend007/brunch-mac/releases/latest" target="_blank"></a>' ;
 					document.getElementById("form").innerHTML = '<button type="submit" class="buttonstyle">Install the latest brunch-mac</button>';
 					break;
 				}
