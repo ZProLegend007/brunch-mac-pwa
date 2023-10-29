@@ -63,10 +63,6 @@ window.onload = function () {
 					document.getElementById("latest-stable").innerHTML = '<b>Stable Brunch:</b><br>'+cookie.value+'<br>=> <a href="https://github.com/sebanc/brunch/releases/latest" target="_blank">Changelog</a>';
 					document.getElementById("form").innerHTML = '<button type="submit" class="buttonstyle">Install the latest stable brunch</button>';
 					break;
-				  case "latest_unstable":
-					document.getElementById("latest-unstable").innerHTML = '<b>Unstable Brunch:</b><br>'+cookie.value+'<br>=> <a href="https://github.com/sebanc/brunch-unstable/releases/latest" target="_blank">Changelog</a>';
-					document.getElementById("form2").innerHTML = '<button type="submit" class="buttonstyle">Install the latest unstable brunch</button>';
-					break;
 				}
 			}
 		}
@@ -82,10 +78,6 @@ window.onload = function () {
 				document.getElementById("latest-stable").innerHTML = '';
 				document.getElementById("form").innerHTML = '';
 				break;
-			  case "latest_unstable":
-				document.getElementById("latest-unstable").innerHTML = '';
-				document.getElementById("form2").innerHTML = '';
-				break;
 			}
 		}
 	});
@@ -98,17 +90,6 @@ window.onload = function () {
 			return false;
 		}
 		ws.send("update-stable");
-		return false;
-	};
-
-	document.getElementById("form2").onsubmit = function () {
-		document.getElementById("log").style.background = "#A9A9A9";
-		log = "<center><b>Console log:</b></center><br>";
-		document.getElementById("log").innerHTML = log;
-		if (!ws) {
-			return false;
-		}
-		ws.send("update-unstable");
 		return false;
 	};
 
