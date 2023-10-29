@@ -3,10 +3,10 @@ window.onload = function () {
 	if (window["WebSocket"]) {
 		ws_connect();
 		ws.onclose = function (evt) {
-			document.body.innerHTML = '<div style="direction: ltr; position: fixed; top: 0; z-index: 999999; display: block; width: 100%; height: 100%; background: #33266e"><p style="position: relative; top: 40%; display: block; font-size: 32px; font-weight: bold; color: #fff; margin: 0 auto; text-align: center">To use this feature you need to enable the brunch "pwa" option.</p></div>';
+			document.body.innerHTML = '<div style="direction: ltr; position: fixed; top: 0; z-index: 999999; display: block; width: 100%; height: 100%; background: #33266e"><p style="position: relative; top: 40%; display: block; font-size: 32px; font-weight: bold; color: #fff; margin: 0 auto; text-align: center">Connecting to your device./nIf this screen stays for longer than a brief period please reload or notify ZProLegend007.</p></div>';
 		};
 	} else {
-		document.body.innerHTML = '<div style="direction: ltr; position: fixed; top: 0; z-index: 999999; display: block; width: 100%; height: 100%; background: #33266e"><p style="position: relative; top: 40%; display: block; font-size: 32px; font-weight: bold; color: #fff; margin: 0 auto; text-align: center">To use this feature you need to enable the brunch "pwa" option.</p></div>';
+		document.body.innerHTML = '<div style="direction: ltr; position: fixed; top: 0; z-index: 999999; display: block; width: 100%; height: 100%; background: #33266e"><p style="position: relative; top: 40%; display: block; font-size: 32px; font-weight: bold; color: #fff; margin: 0 auto; text-align: center">Connecting to your device./nIf this screen stays for longer than a brief period please reload or notify ZProLegend007.</p></div>';
 	}
 
 	checkCookie();
@@ -28,7 +28,7 @@ window.onload = function () {
 		if (Notification.permission !== "granted") {
 			if (await Notification.requestPermission() === "granted") {
 				setCookie("notifications", "yes");
-				showNotification("Only brunch-mac stable release update notifications are enabled by default. You can add more in the settings tab.", "brunch-mac");
+				showNotification("Only brunch-mac update notifications are enabled by default. You can add more in the settings tab.", "brunch-mac");
 				return;
 			}
 			console.log("Notifications disabled by user");
