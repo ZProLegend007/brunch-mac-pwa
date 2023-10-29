@@ -55,7 +55,7 @@ form {
 	padding-left: 0;
 	padding-right: 0;
 	width: 300px;
-	background-color: #33266e;
+	background-color: #04041a;
 	color: white;
 }
 
@@ -72,7 +72,7 @@ form {
 .fleft {
 	display: block;
 	float: left;
-	background-color: #33266e;
+	background-color: #04041a;
 	height: 100%;
 	width: 300px;
 	top: 30px;
