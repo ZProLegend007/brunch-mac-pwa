@@ -21,15 +21,15 @@
 		"type": "image/png"
 	}, {
 		"src": "images/icons/192.png",
-		"sizes": "192x192",
+		"sizes": "any",
 		"type": "image/png"
 	}, {
 		"src": "images/icons/256.png",
-		"sizes": "256x256",
+		"sizes": "any",
 		"type": "image/png"
 	}, {
 		"src": "images/icons/384.png",
-		"sizes": "384x384",
+		"sizes": "any",
 		"type": "image/png"
 	}, {
 		"src": "images/icons/512.png",
