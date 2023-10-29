@@ -28,12 +28,12 @@ window.onload = function () {
 		if (Notification.permission !== "granted") {
 			if (await Notification.requestPermission() === "granted") {
 				setCookie("notifications", "yes");
-				showNotification("Only brunch stable release update notifications are enabled by default. You can add more in the settings tab.", "brunch");
+				showNotification("Only brunch-mac stable release update notifications are enabled by default. You can add more in the settings tab.", "brunch-mac");
 				return;
 			}
 			console.log("Notifications disabled by user");
 			setCookie("notifications", "no");
-			await registration.periodicSync.unregister('get-latest-version');
+			await registration.periodicSync.unregister('get-latest');
 		}
 	}
 
@@ -57,11 +57,11 @@ window.onload = function () {
 			if (cookie.value) {
 				switch (cookie.name) {
 				  case "brunch_version":
-					document.getElementById("brunch-mac-version").innerHTML = '<b>Installed Brunch:</b><br>'+cookie.value;
+					document.getElementById("brunch-mac-version").innerHTML = '<b>Installed Brunch-mac:</b><br>'+cookie.value;
 					break;
-				  case "latest_stable":
+				  case "latest":
 					document.getElementById("latest").innerHTML = '<b>Latest Brunch-mac:</b><br>'+cookie.value+'<br>=> <a href="https://github.com/zprolegend007/brunch-mac/releases/latest" target="_blank"></a>';
-					document.getElementById("form").innerHTML = '<button type="submit" class="buttonstyle">Install the latest stable brunch-mac</button>';
+					document.getElementById("form").innerHTML = '<button type="submit" class="buttonstyle">Install the latest brunch-mac</button>';
 					break;
 				}
 			}
@@ -72,10 +72,10 @@ window.onload = function () {
 			console.log(`Cookie ${cookie.name} deleted`);
 			switch (cookie.name) {
 			  case "brunch_version":
-				document.getElementById("brunch-version").innerHTML = '';
+				document.getElementById("brunch-mac-version").innerHTML = '';
 				break;
 			  case "latest_stable":
-				document.getElementById("latest-stable").innerHTML = '';
+				document.getElementById("latest").innerHTML = '';
 				document.getElementById("form").innerHTML = '';
 				break;
 			}
@@ -89,9 +89,9 @@ window.onload = function () {
 		if (!ws) {
 			return false;
 		}
-		ws.send("update-stable");
+		ws.send("update");
 		return false;
 	};
 
-	setTimeout(() => { ws.send("brunch-version\nlatest-stable\nlatest-unstable\nlatest-chromeos"); }, 2000);
+	setTimeout(() => { ws.send("brunch-mac-version\nlatest\nlatest-chromeos"); }, 2000);
 };
