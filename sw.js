@@ -41,7 +41,7 @@ self.addEventListener('fetch', function(event) {
 const getversion = async () => {
 	console.log('In periodicsync handler');
 	ws_connect();
-	setTimeout(() => { ws.send("latest-stable\nlatest-unstable\nlatest-chromeos"); }, 2000);
+	setTimeout(() => { ws.send("latest\nlatest-chromeos"); }, 2000);
 };
 
 self.addEventListener('periodicsync', event => {
