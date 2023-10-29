@@ -33,7 +33,7 @@ window.onload = function () {
 			}
 			console.log("Notifications disabled by user");
 			setCookie("notifications", "no");
-			await registration.periodicSync.unregister('get-latest');
+			await registration.periodicSync.unregister('get-latest-stable');
 		}
 	}
 
