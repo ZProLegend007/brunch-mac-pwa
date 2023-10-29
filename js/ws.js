@@ -35,33 +35,22 @@ function ws_connect() {
 		var notifications = await getCookie("notifications");
 		var brunch_stable = await getCookie("brunch_stable");
 		var latest_stable = await getCookie("latest_stable");
-		var brunch_unstable = await getCookie("brunch_unstable");
-		var latest_unstable = await getCookie("latest_unstable");
 		var chromeos = await getCookie("chromeos");
 		var latest_chromeos = await getCookie("latest_chromeos");
 		var messages = evt.data.split(':next:');
 		for (var i = 0; i < messages.length; i++) {
 			console.log("Message received: " + messages[i]);
-			if (messages[0] === "brunch-version") {
+			if (messages[0] === "brunch-mac-version") {
 				setCookie("brunch_version", messages[1]);
 				break;
 			}
-			if (messages[0] === "latest-stable") {
+			if (messages[0] === "latest") {
 				if (notifications.value === "yes" && brunch_stable.value === "yes") {
 					if (latest_stable && latest_stable.value !== "" && messages[1] !== "" && latest_stable.value !== messages[1]) {
-						showNotification("New brunch stable release available: " + messages[1], "brunch");
+						showNotification("New brunch-mac release available: " + messages[1], "brunch-mac");
 					}
 				}
 				setCookie("latest_stable", messages[1]);
-				break;
-			}
-			if (messages[0] === "latest-unstable") {
-				if (notifications.value === "yes" && brunch_unstable.value === "yes") {
-					if (latest_unstable && latest_unstable.value !== "" && messages[1] !== "" && latest_unstable.value !== messages[1]) {
-						showNotification("New brunch unstable release available: " + messages[1], "brunch");
-					}
-				}
-				setCookie("latest_unstable", messages[1]);
 				break;
 			}
 			if (messages[0] === "chromeos-version") {
