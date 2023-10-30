@@ -6,7 +6,7 @@ body {
 }
 
 a {
-	color: white;
+	color: ;
 }
 
 p {
@@ -46,7 +46,7 @@ form {
 }
 
 .navbar a:hover {
-	background-color: #ddd;
+	background-color: #4287f5;
 	color: black;
 }
 
