@@ -47,15 +47,15 @@ form {
 
 .navbar a:hover {
 	background-color: #4287f5;
-	color: black;
+	color: white;
 }
 
 .navbar a.active {
 	pointer-events: none;
 	padding-left: 0;
 	padding-right: 0;
-	width: 500px;
-	background-color: #191e2e;
+	width: 45%;
+	background-color: #04041a;
 	color: white;
 }
 
@@ -90,7 +90,7 @@ form {
 	width: 55%;
 	top: 30px;
 	bottom: 0;
-	right: -80px;
+	right: 0;
 }
 
 .box {
