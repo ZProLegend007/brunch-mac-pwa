@@ -52,9 +52,9 @@ form {
 
 .navbar a.active {
 	pointer-events: none;
-	padding-left: 1em;
-	padding-right: 1em;
-	width: 45%;
+	padding-left: 10px;
+	padding-right: 10px;
+	width: 43%;
 	background-color: #04041a;
 	color: white;
 }
@@ -72,11 +72,11 @@ form {
 .fleft {
 	display: block;
 	float: left;
-	padding-left: 1em;
-	padding-right: 1em;
+	padding-left: 10px;
+	padding-right: 10px;
 	background-color: #04041a;
 	height: 100%;
-	width: 45%;
+	width: 43%;
 	top: 30px;
 	bottom: 0;
 	left: 0;
@@ -84,7 +84,7 @@ form {
 
 .fright {
 	display: block;
-	float: right;
+	float: left;
 	background-image:url(../images/background/background.png);
 	background-repeat:no-repeat;
 	background-size:cover;
