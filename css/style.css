@@ -87,7 +87,7 @@ form {
 	background-repeat:repeat;
 	background-size:cover;
 	height: 100%;
-	width: calc(100% - 400px);
+	width: calc(100% - 200%);
 	top: 30px;
 	bottom: 0;
 	right: 0;
