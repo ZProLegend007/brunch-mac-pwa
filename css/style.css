@@ -110,6 +110,6 @@ form {
 }
 
 .buttonstyle:hover {
-	background: white;
-	color: #4287f5;
+	background: #4287f5 ;
+	color: white;
 }
