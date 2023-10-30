@@ -72,8 +72,8 @@ form {
 .fleft {
 	display: block;
 	float: left;
-	padding-left: -10px;
-	padding-right: -10px;
+	padding-left: 1em;
+	padding-right: 1em;
 	background-color: #04041a;
 	height: 100%;
 	width: 45%;
@@ -84,7 +84,7 @@ form {
 
 .fright {
 	display: block;
-	float: left;
+	float: right;
 	background-image:url(../images/background/background.png);
 	background-repeat:repeat;
 	background-size:cover;
