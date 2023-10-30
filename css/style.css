@@ -1,7 +1,7 @@
 body {
 	margin:0 0;
 	padding:0 2;
-	font-family: Brush Script MT, Cursive;
+	font-family: OCR A Std, monospace;
 	font-size: 18px;
 }
 
@@ -105,7 +105,7 @@ form {
 	background: #45526b;
 	color: #ffffff;
 	width: 200px;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: Brush Script MT, Cursive;
 	font-size: 18px;
 }
 
