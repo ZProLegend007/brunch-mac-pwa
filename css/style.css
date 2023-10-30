@@ -15,7 +15,7 @@ p {
 
 form {
 	display: inline-block;
-	padding-top: 5px;
+	padding-top: 8px;
 }
 
 .navbar {
@@ -111,5 +111,5 @@ form {
 
 .buttonstyle:hover {
 	background: white;
-	color: #000000;
+	color: #4287f5;
 }
