@@ -54,7 +54,7 @@ form {
 	pointer-events: none;
 	padding-left: 0;
 	padding-right: 0;
-	width: 300px;
+	width: 500px;
 	background-color: #191e2e;
 	color: white;
 }
@@ -74,7 +74,7 @@ form {
 	float: left;
 	background-color: #04041a;
 	height: 100%;
-	width: 300px;
+	width: 500px;
 	top: 30px;
 	bottom: 0;
 	left: 0;
