@@ -84,12 +84,12 @@ form {
 
 .fright {
 	display: block;
-	float: left;
+	float: right;
 	background-image:url(../images/background/background.png);
 	background-repeat:no-repeat;
 	background-size:cover;
 	height: 100%;
-	width: calc(20px-55%);
+	width: calc(55%-20px);
 	top: 30px;
 	bottom: 0;
 	right: 0;
