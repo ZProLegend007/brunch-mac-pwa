@@ -87,10 +87,10 @@ form {
 	background-repeat:repeat;
 	background-size:cover;
 	height: 100%;
-	width: 65%;
+	width: 55%;
 	top: 30px;
 	bottom: 0;
-	right: 0;
+	right: 50px;
 }
 
 .box {
