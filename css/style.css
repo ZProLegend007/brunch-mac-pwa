@@ -63,9 +63,9 @@ form {
 	color: white;
 	position: absolute;
 	top: 30px;
-	right: -10px;
+	right: 10px;
 	left: -10px;
-	bottom: 10px;
+	bottom: 0;
 	height: calc(100%-30px);
 }
 
