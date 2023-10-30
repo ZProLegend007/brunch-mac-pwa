@@ -52,31 +52,31 @@ form {
 
 .navbar a.active {
 	pointer-events: none;
-	padding-left: 3%;
-	padding-right: 3%;
-	width: 42%;
+	padding-left: 0;
+	padding-right: 0;
+	width: 45%;
 	background-color: #04041a;
 	color: white;
 }
 
 .wrap {
-	color: black;
+	color: white;
 	position: absolute;
 	top: 30px;
-	right: 0;
-	left: 0;
-	bottom: 0;
+	right: 10px;
+	left: 10px;
+	bottom: 10px;
 	height: calc(100%-30px);
 }
 
 .fleft {
 	display: block;
 	float: left;
-	padding-left: 3%;
-	padding-right: 3%;
+	padding-left: 0;
+	padding-right: 0;
 	background-color: #04041a;
 	height: 100%;
-	width: 42%;
+	width: 45%;
 	top: 30px;
 	bottom: 0;
 	left: 0;
