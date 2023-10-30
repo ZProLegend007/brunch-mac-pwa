@@ -52,8 +52,8 @@ form {
 
 .navbar a.active {
 	pointer-events: none;
-	padding-left: 0;
-	padding-right: 0;
+	padding-left: 1em;
+	padding-right: 1em;
 	width: 45%;
 	background-color: #04041a;
 	color: white;
@@ -86,7 +86,7 @@ form {
 	display: block;
 	float: right;
 	background-image:url(../images/background/background.png);
-	background-repeat:repeat;
+	background-repeat:no-repeat;
 	background-size:cover;
 	height: 100%;
 	width: 55%;
@@ -97,7 +97,7 @@ form {
 
 .box {
 	width: 80%;
-	height: 500px;
+	height: 600px;
 	margin-left: auto;
 	margin-right: auto;
 	padding: 1em;
