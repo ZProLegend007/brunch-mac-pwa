@@ -72,8 +72,8 @@ form {
 .fleft {
 	display: block;
 	float: left;
-	padding-left: 10px;
-	padding-right: 10px;
+	padding-left: 0;
+	padding-right: 0;
 	background-color: #04041a;
 	height: 100%;
 	width: 45%;
