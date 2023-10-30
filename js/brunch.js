@@ -57,7 +57,7 @@ window.onload = function () {
 			if (cookie.value) {
 				switch (cookie.name) {
 				  case "brunch_version":
-					document.getElementById("brunch-mac-version").innerHTML = '<p>Currently installed brunch-mac file:</p><br>'+cookie.value';
+					document.getElementById("brunch-mac-version").innerHTML = 'Currently installed brunch-mac file:<br>'+cookie.value';
 					break;
 				  case "latest_stable":
 					document.getElementById("latest").innerHTML = '<b>Latest Brunch-mac:</b><br>'+cookie.value+'<br> <a href="https://github.com/zprolegend007/brunch-mac/releases/latest" target="_blank"></a>' ;
