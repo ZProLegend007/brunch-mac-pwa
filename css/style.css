@@ -6,7 +6,7 @@ body {
 }
 
 a {
-	color: ;
+	color: white;
 }
 
 p {
@@ -110,6 +110,6 @@ form {
 }
 
 .buttonstyle:hover {
-	background: #4287f5 ;
+	background: #4287f5;
 	color: white;
 }
