@@ -11,8 +11,6 @@ a {
 
 p {
 	display: inline;
-	padding-left: 10px;
-	padding-right: 10px;
 }
 
 form {
@@ -74,8 +72,8 @@ form {
 .fleft {
 	display: block;
 	float: left;
-	padding-left: 0;
-	padding-right: 0;
+	margin-left: 10px;
+	margin-right: 10px;
 	background-color: #04041a;
 	height: 100%;
 	width: 45%;
