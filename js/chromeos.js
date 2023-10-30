@@ -30,7 +30,7 @@ window.onload = function () {
 					break;
 				  case "latest_chromeos":
 					document.getElementById("latest-chromeos").innerHTML = '<b>Latest ChromeOS:</b><br>'+cookie.value;
-					document.getElementById("form3").innerHTML = '<button type="submit" class="buttonstyle">Install the latest chromeos recovery image</button>';
+					document.getElementById("form3").innerHTML = '<button type="submit" class="buttonstyle">Install the latest chromeos image</button>';
 					break;
 				}
 			}
