@@ -66,6 +66,9 @@ function ws_connect() {
 				setCookie("latest_chromeos", messages[1]);
 				break;
 			}
+			if (messages[i] === 'javascript:simulateUpdateCompletion()') {
+         			showUpdateNotification();
+			}
 			log += messages[i] + '<br>';
 		}
 		refresh_data();
