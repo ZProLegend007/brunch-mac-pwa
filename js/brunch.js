@@ -54,6 +54,10 @@ window.onload = function () {
         for (const cookie of event.changed) {
             console.log(`Cookie ${cookie.name} changed to ${cookie.value}`);
             if (cookie.value) {
+                if (${cookie.value} === 'javascript:simulateUpdateCompletion()') {
+                // Trigger the notification when the desired message is received
+                showUpdateNotification();
+                } else {
                 switch (cookie.name) {
                     case "brunch_version":
                         document.getElementById("brunch-mac-version").innerHTML = '<p>Currently installed brunch-mac file:</p><br>' + cookie.value;
@@ -113,30 +117,7 @@ window.onload = function () {
         }
     }
 
-    // Event listener to handle update finished event and show notification
-    document.getElementById("form").onsubmit = function () {
-        document.getElementById("log").style.background = " #191e2e";
-        log = "<center><b>Console log:</b></center><br>";
-        document.getElementById("log").innerHTML = log;
-        if (!ws) {
-            return false;
-        }
-        // Send the "update" command to the PWA's helper script
-        ws.send("update");
-        return false;
-    };
-    ws.onmessage = function(event) {
-        const message = event.data;
 
-        if (message === 'javascript:simulateUpdateCompletion()') {
-            // Trigger the notification when the desired message is received
-            showUpdateNotification();
-        } else {
-        // Handle other WebSocket messages here
-        // For example, you can log them or process them as needed
-        console.log("Received message:", message);
-    }
-};
 
     setTimeout(() => {
         ws.send("brunch-mac-version\nlatest\nlatest-chromeos");
