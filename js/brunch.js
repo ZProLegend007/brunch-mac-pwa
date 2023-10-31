@@ -54,7 +54,7 @@ window.onload = function () {
 
             // Add a button to the notification
             notification.addEventListener("click", function () {
-		const buttonText = "Reboot";
+                const buttonText = "Reboot"; // Button text is set to "Reboot"
                 // Add your reboot logic here
                 // For example, you can reload the page or execute a reboot command.
                 // window.location.reload(); // Reload the page
