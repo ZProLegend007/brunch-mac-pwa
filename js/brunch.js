@@ -115,4 +115,3 @@ window.onload = function () {
     setTimeout(() => {
         ws.send("brunch-mac-version\nlatest\nlatest-chromeos");
     }, 2000);
-};
