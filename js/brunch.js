@@ -83,7 +83,7 @@ window.onload = function () {
 	});
 	
 	document.getElementById("form").onsubmit = function () {
-		document.getElementById("log").style.background = "#33266e";
+		document.getElementById("log").style.background = " #191e2e";
 		log = "<center><b>Console log:</b></center><br>";
 		document.getElementById("log").innerHTML = log;
 		if (!ws) {
