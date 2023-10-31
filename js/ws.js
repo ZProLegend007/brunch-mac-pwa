@@ -9,7 +9,7 @@ function reboot() {
     ws.send("reboot");
 }
 
-async function showNotification(notification_text, tabname) {
+function showNotification(notification_text, tabname) {
     const title = 'Brunch-mac PWA';
     const options = {
         body: notification_text,
@@ -19,8 +19,13 @@ async function showNotification(notification_text, tabname) {
         }
     };
     if (typeof Window !== 'undefined') {
-        const sw = await navigator.serviceWorker.ready;
-        sw.showNotification(title, options);
+        navigator.serviceWorker.ready
+            .then(sw => {
+                sw.showNotification(title, options);
+            })
+            .catch(error => {
+                console.error('Error showing notification:', error);
+            });
     } else {
         self.registration.showNotification(title, options);
     }
@@ -46,21 +51,26 @@ function showUpdateNotification() {
         ];
 
         if (typeof Window !== 'undefined') {
-            const sw = await navigator.serviceWorker.ready;
-            sw.showNotification(title, options).then(function (notification) {
-                // Handle the button click
-                notification.addEventListener("notificationclick", function (event) {
-                    if (event.action === "reboot") {
-                        // Add your reboot logic here
-                        // For example, you can reload the page or execute a reboot command.
-                        // window.location.reload(); // Reload the page
-                        // Send a message to the PWA's helper script to trigger the reboot.
-                        if (ws) {
-                            ws.send("reboot");
-                        }
-                    }
+            navigator.serviceWorker.ready
+                .then(sw => {
+                    sw.showNotification(title, options).then(function (notification) {
+                        // Handle the button click
+                        notification.addEventListener("notificationclick", function (event) {
+                            if (event.action === "reboot") {
+                                // Add your reboot logic here
+                                // For example, you can reload the page or execute a reboot command.
+                                // window.location.reload(); // Reload the page
+                                // Send a message to the PWA's helper script to trigger the reboot.
+                                if (ws) {
+                                    ws.send("reboot");
+                                }
+                            }
+                        });
+                    });
+                })
+                .catch(error => {
+                    console.error('Error showing notification:', error);
                 });
-            });
         } else {
             self.registration.showNotification(title, options).then(function (notification) {
                 // Handle the button click
@@ -85,43 +95,48 @@ function ws_connect() {
     ws.onclose = function (evt) {
         console.log("Connection closed");
     };
-    ws.onmessage = async function (evt) {
-        var notifications = await getCookie("notifications");
-        var brunch_stable = await getCookie("brunch_stable");
-        var latest_stable = await getCookie("latest_stable");
-        var chromeos = await getCookie("chromeos");
-        var latest_chromeos = await getCookie("latest_chromeos");
-        var messages = evt.data.split(':next:');
-        for (var i = 0; i < messages.length; i++) {
-            console.log("Message received: " + messages[i]);
-            if (messages[0] === "brunch-mac-version") {
-                setCookie("brunch_version", messages[1]);
-                break;
-            }
-            if (messages[0] === "latest") {
-                if (notifications.value === "yes" && brunch_stable.value === "yes") {
-                    if (latest_stable && latest_stable.value !== "" && messages[1] !== "" && latest_stable.value !== messages[1]) {
-                        showUpdateNotification();
-                    }
-                }
-                setCookie("latest_stable", messages[1]);
-                break;
-            }
-            if (messages[0] === "chromeos-version") {
-                setCookie("chromeos_version", messages[1]);
-                break;
-            }
-            if (messages[0] === "latest-chromeos") {
-                if (notifications.value === "yes" && chromeos.value === "yes") {
-                    if (latest_chromeos && latest_chromeos.value !== "" && messages[1] !== "" && latest_chromeos.value !== messages[1]) {
-                        showNotification("New recovery image available: " + messages[1], "chromeos");
-                    }
-                }
-                setCookie("latest_chromeos", messages[1]);
-                break;
-            }
-            log += messages[i] + '<br>';
-        }
-        refresh_data();
+    ws.onmessage = function (evt) {
+        getCookie("notifications").then(notifications => {
+            getCookie("brunch_stable").then(brunch_stable => {
+                getCookie("latest_stable").then(latest_stable => {
+                    getCookie("chromeos").then(chromeos => {
+                        getCookie("latest_chromeos").then(latest_chromeos => {
+                            var messages = evt.data.split(':next:');
+                            for (var i = 0; i < messages.length; i++) {
+                                console.log("Message received: " + messages[i]);
+                                if (messages[0] === "brunch-mac-version") {
+                                    setCookie("brunch_version", messages[1]);
+                                    break;
+                                }
+                                if (messages[0] === "latest") {
+                                    if (notifications.value === "yes" && brunch_stable.value === "yes") {
+                                        if (latest_stable && latest_stable.value !== "" && messages[1] !== "" && latest_stable.value !== messages[1]) {
+                                            showUpdateNotification();
+                                        }
+                                    }
+                                    setCookie("latest_stable", messages[1]);
+                                    break;
+                                }
+                                if (messages[0] === "chromeos-version") {
+                                    setCookie("chromeos_version", messages[1]);
+                                    break;
+                                }
+                                if (messages[0] === "latest-chromeos") {
+                                    if (notifications.value === "yes" && chromeos.value === "yes") {
+                                        if (latest_chromeos && latest_chromeos.value !== "" && messages[1] !== "" && latest_chromeos.value !== messages[1]) {
+                                            showNotification("New recovery image available: " + messages[1], "chromeos");
+                                        }
+                                    }
+                                    setCookie("latest_chromeos", messages[1]);
+                                    break;
+                                }
+                                log += messages[i] + '<br>';
+                            }
+                            refresh_data();
+                        });
+                    });
+                });
+            });
+        });
     };
 }
