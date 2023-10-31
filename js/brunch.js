@@ -53,10 +53,6 @@ window.onload = function () {
         console.log(`${event.changed.length} changed cookies`);
         for (const cookie of event.changed) {
             console.log(`Cookie ${cookie.name} changed to ${cookie.value}`);
-            if (cookie.value === 'javascript:simulateUpdateCompletion()') {
-                // Trigger the notification when the desired message is received
-                showUpdateNotification();
-            } else {
                 switch (cookie.name) {
                     case "brunch_version":
                         document.getElementById("brunch-mac-version").innerHTML = '<p>Currently installed brunch-mac file:</p><br>' + cookie.value;
