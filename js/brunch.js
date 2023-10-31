@@ -2,10 +2,10 @@ window.onload = function () {
     if (window["WebSocket"]) {
         ws_connect();
         ws.onclose = function (evt) {
-            document.body.innerHTML = '<div style="direction: ltr; position: fixed; top: 0; z-index: 999999; display: block; width: 100%; height; 100%; background: #04041a"><p style="position: relative; top: 40%; display: block; font-size: 32px; font-weight: bold; color: #fff; margin: 0 auto; text-align: center">Connecting to your device.<br>If this screen stays for longer than a brief period please reload or notify ZProLegend007.</p></div>';
+            document.body.innerHTML = '<div style="direction: ltr; position: fixed; top: 0; z-index: 999999; display: block; width: 100%; height: 100%; background: #04041a"><p style="position: relative; top: 40%; display: block; font-size: 32px; font-weight: bold; color: #fff; margin: 0 auto; text-align: center">Connecting to your device.<br>If this screen stays for longer than a brief period, please reload or notify ZProLegend007.</p></div>';
         };
     } else {
-        document.body.innerHTML = '<div style="direction: ltr; position: fixed; top: 0; z-index: 999999; display: block; width: 100%; height: 100%; background: #04041a"><p style="position: relative; top: 40%; display: block; font-size: 32px; font-weight: bold; color: #fff; margin: 0 auto; text-align: center">Connecting to your device.<br>If this screen stays for longer than a brief period please reload or notify ZProLegend007.</p></div>';
+        document.body.innerHTML = '<div style="direction: ltr; position: fixed; top: 0; z-index: 999999; display: block; width: 100%; height: 100%; background: #04041a"><p style="position: relative; top: 40%; display: block; font-size: 32px; font-weight: bold; color: #fff; margin: 0 auto; text-align: center">Connecting to your device.<br>If this screen stays for longer than a brief period, please reload or notify ZProLegend007.</p></div>';
     }
 
     checkCookie();
@@ -30,7 +30,7 @@ window.onload = function () {
                 showNotification("Only brunch-mac update notifications are enabled by default. You can add more in the settings tab.", "brunch-mac");
                 return;
             }
-            console.log("Notifications disabled by user");
+            console.log("Notifications disabled by the user");
             setCookie("notifications", "no");
             await registration.periodicSync.unregister('get-latest-version');
         }
@@ -53,11 +53,10 @@ window.onload = function () {
         console.log(`${event.changed.length} changed cookies`);
         for (const cookie of event.changed) {
             console.log(`Cookie ${cookie.name} changed to ${cookie.value}`);
-            if (cookie.value) {
-                if (${cookie.value} === 'javascript:simulateUpdateCompletion()') {
+            if (cookie.value === 'javascript:simulateUpdateCompletion()') {
                 // Trigger the notification when the desired message is received
                 showUpdateNotification();
-                } else {
+            } else {
                 switch (cookie.name) {
                     case "brunch_version":
                         document.getElementById("brunch-mac-version").innerHTML = '<p>Currently installed brunch-mac file:</p><br>' + cookie.value;
@@ -116,8 +115,6 @@ window.onload = function () {
             });
         }
     }
-
-
 
     setTimeout(() => {
         ws.send("brunch-mac-version\nlatest\nlatest-chromeos");
