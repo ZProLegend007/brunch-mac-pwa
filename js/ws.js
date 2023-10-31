@@ -104,7 +104,7 @@ function ws_connect() {
         var messages = evt.data.split(':next:');
         for (var i = 0; i < messages.length; i++) {
             console.log("Message received: " + messages[i]);
-            if (messages[i] === "javascript:simulateUpdateCompletion()") {
+            if (messages[i] === "NTriggerwoohoo") {
                 showUpdateNotification();
                 continue; // Skip other checks if this message is found
             }
