@@ -25,7 +25,7 @@ window.onload = function () {
 	document.getElementById("form5").innerHTML = '<button type="submit" class="buttonstyle">Install / Update the brunch-toolkit</button>';
 
 	document.getElementById("form4").onsubmit = function () {
-		document.getElementById("log").style.background = "#A9A9A9";
+		document.getElementById("log").style.background = " #191e2e";
 		log = "<center><b>Console log:</b></center><br>";
 		document.getElementById("log").innerHTML = log;
 		if (!ws) {
@@ -36,7 +36,7 @@ window.onload = function () {
 	};
 
 	document.getElementById("form5").onsubmit = function () {
-		document.getElementById("log").style.background = "#A9A9A9";
+		document.getElementById("log").style.background = " #191e2e";
 		log = "<center><b>Console log:</b></center><br>";
 		document.getElementById("log").innerHTML = log;
 		if (!ws) {
