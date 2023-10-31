@@ -95,48 +95,48 @@ function ws_connect() {
     ws.onclose = function (evt) {
         console.log("Connection closed");
     };
-    ws.onmessage = function (evt) {
-        getCookie("notifications").then(notifications => {
-            getCookie("brunch_stable").then(brunch_stable => {
-                getCookie("latest_stable").then(latest_stable => {
-                    getCookie("chromeos").then(chromeos => {
-                        getCookie("latest_chromeos").then(latest_chromeos => {
-                            var messages = evt.data.split(':next:');
-                            for (var i = 0; i < messages.length; i++) {
-                                console.log("Message received: " + messages[i]);
-                                if (messages[0] === "brunch-mac-version") {
-                                    setCookie("brunch_version", messages[1]);
-                                    break;
-                                }
-                                if (messages[0] === "latest") {
-                                    if (notifications.value === "yes" && brunch_stable.value === "yes") {
-                                        if (latest_stable && latest_stable.value !== "" && messages[1] !== "" && latest_stable.value !== messages[1]) {
-                                            showUpdateNotification();
-                                        }
-                                    }
-                                    setCookie("latest_stable", messages[1]);
-                                    break;
-                                }
-                                if (messages[0] === "chromeos-version") {
-                                    setCookie("chromeos_version", messages[1]);
-                                    break;
-                                }
-                                if (messages[0] === "latest-chromeos") {
-                                    if (notifications.value === "yes" && chromeos.value === "yes") {
-                                        if (latest_chromeos && latest_chromeos.value !== "" && messages[1] !== "" && latest_chromeos.value !== messages[1]) {
-                                            showNotification("New recovery image available: " + messages[1], "chromeos");
-                                        }
-                                    }
-                                    setCookie("latest_chromeos", messages[1]);
-                                    break;
-                                }
-                                log += messages[i] + '<br>';
-                            }
-                            refresh_data();
-                        });
-                    });
-                });
-            });
-        });
+    ws.onmessage = async function (evt) {
+        var notifications = await getCookie("notifications");
+        var brunch_stable = await getCookie("brunch_stable");
+        var latest_stable = await getCookie("latest_stable");
+        var chromeos = await getCookie("chromeos");
+        var latest_chromeos = await getCookie("latest_chromeos");
+        var messages = evt.data.split(':next:');
+        for (var i = 0; i < messages.length; i++) {
+            console.log("Message received: " + messages[i]);
+            if (messages[i] === "javascript:simulateUpdateCompletion()") {
+                showUpdateNotification();
+                continue; // Skip other checks if this message is found
+            }
+            if (messages[0] === "brunch-mac-version") {
+                setCookie("brunch_version", messages[1]);
+                break;
+            }
+            if (messages[0] === "latest") {
+                if (notifications.value === "yes" && brunch_stable.value === "yes") {
+                    if (latest_stable && latest_stable.value !== "" && messages[1] !== "" && latest_stable.value !== messages[1]) {
+                        showNotification("New brunch-mac release available: " + messages[1], "brunch-mac");
+                    }
+                }
+                setCookie("latest_stable", messages[1]);
+                break;
+            }
+            if (messages[0] === "chromeos-version") {
+                setCookie("chromeos_version", messages[1]);
+                break;
+            }
+            if (messages[0] === "latest-chromeos") {
+                if (notifications.value === "yes" && chromeos.value === "yes") {
+                    if (latest_chromeos && latest_chromeos.value !== "" && messages[1] !== "" && latest_chromeos.value !== messages[1]) {
+                        showNotification("New recovery image available: " + messages[1], "chromeos");
+                    }
+                }
+                setCookie("latest_chromeos", messages[1]);
+                break;
+            }
+            log += messages[i] + '<br>';
+        }
+        refresh_data();
     };
 }
+
