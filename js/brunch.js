@@ -78,7 +78,7 @@ window.onload = function () {
                     break;
             }
         }
-    });
+    }
 
     document.getElementById("form").onsubmit = function () {
         document.getElementById("log").style.background = "#191e2e";
