@@ -79,7 +79,7 @@ window.onload = function () {
                     break;
             }
         }
-    });
+    };
 
     document.getElementById("form").onsubmit = function () {
         document.getElementById("log").style.background = "#191e2e";
@@ -95,13 +95,13 @@ window.onload = function () {
     // Function to show a notification for the update completion
     function showUpdateNotification() {
         if (Notification.permission === "granted") {
-            const notification = new Notification("Almost there!", {
+            const notification = new Notification("Almost finished!", {
                 body: "You will need to reboot to finish the update. Click below to reboot.",
             });
 
             // Add a button to the notification
             notification.addEventListener("click", function () {
-                const buttonText = "Reboot"; // Button text is set to "Reboot"
+                const buttonText = "Reboot";
                 // Add your reboot logic here
                 // For example, you can reload the page or execute a reboot command.
                 // window.location.reload(); // Reload the page
@@ -112,6 +112,19 @@ window.onload = function () {
             });
         }
     }
+
+    // Event listener to handle update finished event and show notification
+    document.getElementById("form").onsubmit = function () {
+        document.getElementById("log").style.background = " #191e2e";
+        log = "<center><b>Console log:</b></center><br>";
+        document.getElementById("log").innerHTML = log;
+        if (!ws) {
+            return false;
+        }
+        // Send the "update" command to the PWA's helper script
+        ws.send("update");
+        return false;
+    };
 
     // Simulate an update completion event (call this when the update is completed)
     function simulateUpdateCompletion() {
