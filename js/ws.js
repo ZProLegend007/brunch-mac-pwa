@@ -13,7 +13,7 @@ async function showNotification(notification_text, tabname) {
     const title = 'Brunch-mac PWA';
     const options = {
         body: notification_text,
-        icon: '/brunch-mac-pwa/images/icons/512.png',
+        icon: '/brunch-mac-pwa/images/icons/144.png',
         data: {
             tab: tabname,
         }
@@ -28,13 +28,13 @@ async function showNotification(notification_text, tabname) {
 
 function showUpdateNotification() {
     if (Notification.permission === "granted") {
-        const notification_text = "Your update is almost finished. You will need to reboot to complete the process.";
-        const tabname = "update"; // You can change the tabname as needed
+        const notification_text = "You will need to reboot to finish the update. Click below to reboot.";
+        const tabname = "Almost there!"; // You can change the tabname as needed
 
         const title = 'Brunch-mac PWA';
         const options = {
             body: notification_text,
-            icon: '/brunch-mac-pwa/images/icons/512.png',
+            icon: '/brunch-mac-pwa/images/icons/144.png',
             data: {
                 tab: tabname,
             }
