@@ -13,7 +13,7 @@ async function showNotification(notification_text, tabname) {
 	const title = 'Brunch-mac PWA';
 	const options = {
 		body: notification_text,
-		icon: '/brunch-mac-pwa/images/icons/512.png',
+		icon: '/brunch-mac-pwa/images/icons/144.png',
 		data: {
 			tab: tabname,
 		}
