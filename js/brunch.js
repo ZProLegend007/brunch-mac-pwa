@@ -89,11 +89,6 @@ window.onload = function () {
             return false;
         }
         ws.send("update");
-
-        // Check if the message from PWA helper script is 'javascript:simulateUpdateCompletion()'
-        if (ws && messageFromHelperScript === 'javascript:simulateUpdateCompletion()') {
-            showUpdateNotification();
-        }
         return false;
     };
 
@@ -130,6 +125,14 @@ window.onload = function () {
         ws.send("update");
         return false;
     };
+    ws.onmessage = function(event) {
+    const message = event.data;
+
+    if (message === 'javascript:simulateUpdateCompletion()') {
+        // Trigger the notification when the desired message is received
+        showUpdateNotification();
+    }
+};
 
     setTimeout(() => {
         ws.send("brunch-mac-version\nlatest\nlatest-chromeos");
