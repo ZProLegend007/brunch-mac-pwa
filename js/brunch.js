@@ -63,7 +63,7 @@ window.onload = function () {
                         break;
                 }
             }
-        }
+        });
 
         console.log(`${event.deleted.length} deleted cookies`);
         for (const cookie of event.deleted) {
