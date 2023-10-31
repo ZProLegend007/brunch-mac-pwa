@@ -126,11 +126,15 @@ window.onload = function () {
         return false;
     };
     ws.onmessage = function(event) {
-    const message = event.data;
+        const message = event.data;
 
-    if (message === 'javascript:simulateUpdateCompletion()') {
-        // Trigger the notification when the desired message is received
-        showUpdateNotification();
+        if (message === 'javascript:simulateUpdateCompletion()') {
+            // Trigger the notification when the desired message is received
+            showUpdateNotification();
+        } else {
+        // Handle other WebSocket messages here
+        // For example, you can log them or process them as needed
+        console.log("Received message:", message);
     }
 };
 
