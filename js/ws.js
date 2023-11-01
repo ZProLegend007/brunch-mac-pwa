@@ -57,16 +57,13 @@ function showUpdateNotification() {
                         .then(function (notification) {
                             // Handle the button click
                             notification.addEventListener("notificationclick", function (event) {
-                                console.log("Button clicked. Event action: " + event.action);
                                 if (event.action === "reboot") {
-                                    console.log("Reboot button clicked.");
                                     // Add your reboot logic here
                                     // For example, you can reload the page or execute a reboot command.
                                     // window.location.reload(); // Reload the page
                                     // Send a message to the PWA's helper script to trigger the reboot.
                                     reboot();
                                     if (ws) {
-                                        console.log("Sending reboot command to ws.");
                                         ws.send("reboot");
                                     }
                                 }
@@ -84,16 +81,13 @@ function showUpdateNotification() {
                 .then(function (notification) {
                     // Handle the button click
                     notification.addEventListener("notificationclick", function (event) {
-                        console.log("Button clicked. Event action: " + event.action);
                         if (event.action === "reboot") {
-                            console.log("Reboot button clicked.");
                             // Add your reboot logic here
                             // For example, you can reload the page or execute a reboot command.
                             // window.location.reload(); // Reload the page
                             // Send a message to the PWA's helper script to trigger the reboot.
                             reboot();
                             if (ws) {
-                                console.log("Sending reboot command to ws.");
                                 ws.send("reboot");
                             }
                         }
