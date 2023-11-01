@@ -52,13 +52,6 @@ self.addEventListener('periodicsync', event => {
 });
 self.addEventListener('notificationclick', function (event) {
     if (event.action === 'reboot') {
-        // Handle the action here (e.g., reboot logic)
-        // ...
-        // You can also communicate with the main script if needed
-        clients.matchAll().then(clients => {
-            if (clients && clients.length) {
-                clients[0].postMessage({ action: 'reboot' });
-            }
-        });
+	reboot()
     }
 });
