@@ -51,7 +51,6 @@ self.addEventListener('periodicsync', event => {
 	}
 });
 self.addEventListener('notificationclick', function (event) {
-	console.log(event.notification.data.tab);
         if (event.action === "reboot") {
         // Add your reboot logic here
         // For example, you can reload the page or execute a reboot command.
