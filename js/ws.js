@@ -50,7 +50,7 @@ function showUpdateNotification() {
             { action: 'reboot', title: 'Reboot' }
         ];
 
-        if (typeof Window !== 'undefined') {
+        if (typeof window !== 'undefined') {
             navigator.serviceWorker.ready
                 .then(sw => {
                     sw.showNotification(title, options)
@@ -99,6 +99,7 @@ function showUpdateNotification() {
         }
     }
 }
+
 
 
 
