@@ -75,7 +75,7 @@ function showUpdateNotification() {
         } else {
             self.registration.showNotification(title, options).then(function (notification) {
                 // Handle the button click
-                notification.addEventListener("notificationclick", function (event) {
+                self.addEventListener("notificationclick", function (event) {
                     if (event.action === "reboot") {
                         // Add your reboot logic here
                         // For example, you can reload the page or execute a reboot command.
