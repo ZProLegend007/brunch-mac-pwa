@@ -55,3 +55,9 @@ self.addEventListener('notificationclick', function (event) {
 	reboot()
     }
 });
+self.addEventListener("message", (event) => {
+    const data = event.data;
+    if (data.type === "showUpdateNotification") {
+        self.registration.showNotification("Brunch-mac PWA", data.options);
+    }
+});
