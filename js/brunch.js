@@ -104,7 +104,7 @@ window.onload = function () {
 				ws.send("reboot");
 			}
 		 }
-	};
-
+	}
+});
 	setTimeout(() => { ws.send("brunch-mac-version\nlatest\nlatest-chromeos"); }, 2000);
 };
