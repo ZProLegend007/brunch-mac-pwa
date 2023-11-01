@@ -61,7 +61,7 @@ function showUpdateNotification() {
                                 // For example, you can reload the page or execute a reboot command.
                                 // window.location.reload(); // Reload the page
                                 // Send a message to the PWA's helper script to trigger the reboot.
-                                reboot()
+                                reboot();
                                 if (ws) {
                                     ws.send("reboot");
                                 }
@@ -81,7 +81,7 @@ function showUpdateNotification() {
                         // For example, you can reload the page or execute a reboot command.
                         // window.location.reload(); // Reload the page
                         // Send a message to the PWA's helper script to trigger the reboot.
-                        reboot()
+                        reboot();
                         if (ws) {
                             ws.send("reboot");
                         }
@@ -104,8 +104,11 @@ function ws_connect() {
         var chromeos = await getCookie("chromeos");
         var latest_chromeos = await getCookie("latest_chromeos");
         var messages = evt.data.split(':next:');
+        var showUpdateNotificationCondition = false; // Add this condition
+
         for (var i = 0; i < messages.length; i++) {
             console.log("Message received: " + messages[i]);
+
             if (messages[i] === "NTriggerwoohoo") {
                 showUpdateNotification();
                 continue; // Skip other checks if this message is found
@@ -128,8 +131,8 @@ function ws_connect() {
                 break;
             }
             if (messages[0] === "latest-chromeos") {
-                if (notifications.value === "yes" && chromeos.value === "yes") {
-                    if (latest_chromeos && latest_chromeos.value !== "" && messages[1] !== "" && latest_chromeos.value !== messages[1]) {
+                if (notifications.value === "yes" and chromeos.value === "yes") {
+                    if (latest_chromeos and latest_chromeos.value !== "" and messages[1] !== "" and latest_chromeos.value !== messages[1]) {
                         showNotification("New recovery image available: " + messages[1], "chromeos");
                     }
                 }
@@ -138,6 +141,11 @@ function ws_connect() {
             }
             log += messages[i] + '<br>';
         }
+
+        if (showUpdateNotificationCondition) {
+            showUpdateNotification();
+        }
+
         refresh_data();
     };
 }
