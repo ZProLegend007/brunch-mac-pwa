@@ -51,24 +51,8 @@ function showUpdateNotification() {
             Notification.requestPermission()
                 .then(function (permission) {
                     if (permission === "granted") {
-                        const notification = new Notification(title, options);
-                        // Handle the button click
-                        notification.addEventListener("notificationclick", function (event) {
-                            if (event.action === "reboot") {
-                                // Add your reboot logic here
-                                // For example, you can reload the page or execute a reboot command.
-                                // window.location.reload(); // Reload the page
-                                // Send a message to the PWA's helper script to trigger the reboot.
-                                reboot();
-                                if (ws) {
-                                    ws.send("reboot");
-                                }
-                            }
-                        });
+                        new Notification(title, options);
                     }
-                })
-                .catch(error => {
-                    console.error('Error showing notification:', error);
                 });
         }
     }
