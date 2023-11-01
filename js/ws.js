@@ -104,7 +104,7 @@ function showUpdateNotification() {
                 });
         }
     }
-});
+}
 
 
 
