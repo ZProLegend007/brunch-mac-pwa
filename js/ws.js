@@ -59,7 +59,7 @@ function showUpdateNotification() {
                         .then(function (n) {
                             notification = n; // Assign the notification object
                             // Handle the button click
-                            notification.addEventListener("notificationclick", function (event) {
+                            window.addEventListener("notificationclick", function (event) {
                                 if (event.action === "reboot") {
                                     // Add your reboot logic here
                                     // For example, you can reload the page or execute a reboot command.
@@ -84,7 +84,7 @@ function showUpdateNotification() {
                 .then(function (n) {
                     notification = n; // Assign the notification object
                     // Handle the button click
-                    notification.addEventListener("notificationclick", function (event) {
+                    window.addEventListener("notificationclick", function (event) {
                         if (event.action === "reboot") {
                             // Add your reboot logic here
                             // For example, you can reload the page or execute a reboot command.
