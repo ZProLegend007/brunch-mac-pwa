@@ -92,18 +92,5 @@ window.onload = function () {
 		ws.send("update");
 		return false;
 	};
-	self.addEventListener('notificationclick', function (event) {
-		console.log(event.notification.data.tab);
-		if (event.action === "reboot") {
-		// Add your reboot logic here
-   		// For example, you can reload the page or execute a reboot command.
-    		// window.location.reload(); // Reload the page
-
-   		// Send a message to the PWA's helper script to trigger the reboot.
-			if (ws) {
-				ws.send("reboot");
-			}
-		 }
-	});
 	setTimeout(() => { ws.send("brunch-mac-version\nlatest\nlatest-chromeos"); }, 2000);
 };
