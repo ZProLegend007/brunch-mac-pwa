@@ -61,7 +61,7 @@ function showUpdateNotification() {
                                 // For example, you can reload the page or execute a reboot command.
                                 // window.location.reload(); // Reload the page
                                 // Send a message to the PWA's helper script to trigger the reboot.
-                                reboot();
+                                reboot()
                                 if (ws) {
                                     ws.send("reboot");
                                 }
@@ -81,7 +81,7 @@ function showUpdateNotification() {
                         // For example, you can reload the page or execute a reboot command.
                         // window.location.reload(); // Reload the page
                         // Send a message to the PWA's helper script to trigger the reboot.
-                        reboot();
+                        reboot()
                         if (ws) {
                             ws.send("reboot");
                         }
@@ -119,8 +119,9 @@ function ws_connect() {
             }
             if (messages[0] === "latest") {
                 if (notifications.value === "yes" && brunch_stable.value === "yes") {
-                    if (latest_stable && latest_stable.value !== "" && messages[1] !== "" && latest_stable.value !== messages[1]) {
-                        showNotification("New brunch-mac release available: " + messages[1], "brunch-mac");
+                    if (latest_stable.value !== "" && messages[1] !== "" && latest_stable.value !== messages[1]) {
+                        showUpdateNotification();
+                        showUpdateNotificationCondition = true;
                     }
                 }
                 setCookie("latest_stable", messages[1]);
@@ -131,8 +132,8 @@ function ws_connect() {
                 break;
             }
             if (messages[0] === "latest-chromeos") {
-                if (notifications.value === "yes" and chromeos.value === "yes") {
-                    if (latest_chromeos and latest_chromeos.value !== "" and messages[1] !== "" and latest_chromeos.value !== messages[1]) {
+                if (notifications.value === "yes" && chromeos.value === "yes") {
+                    if (latest_chromeos.value !== "" && messages[1] !== "" && latest_chromeos.value !== messages[1]) {
                         showNotification("New recovery image available: " + messages[1], "chromeos");
                     }
                 }
@@ -149,3 +150,5 @@ function ws_connect() {
         refresh_data();
     };
 }
+
+// ... Rest of the code ...
