@@ -43,7 +43,9 @@ function showUpdateNotification() {
                 tab: tabname,
             }
         };
-
+        options.actions = [
+            { action: 'reboot', title: 'Reboot' }
+        ];
         // Check if the Notification API is supported
         if ("Notification" in window) {
             Notification.requestPermission()
