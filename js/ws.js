@@ -53,7 +53,7 @@ function showUpdateNotification() {
         if (typeof Window !== 'undefined') {
             navigator.serviceWorker.ready
                 .then(sw => {
-                    sw.showUpdateNotification(title, options).then(function (notification) {
+                    sw.showNotification(title, options).then(function (notification) {
                         // Handle the button click
                         notification.addEventListener("notificationclick", function (event) {
                             if (event.action === "reboot") {
@@ -61,9 +61,7 @@ function showUpdateNotification() {
                                 // For example, you can reload the page or execute a reboot command.
                                 // window.location.reload(); // Reload the page
                                 // Send a message to the PWA's helper script to trigger the reboot.
-                                if (ws) {
-                                    ws.send("reboot");
-                                }
+                                ws.send("reboot");
                             }
                         });
                     });
@@ -72,7 +70,7 @@ function showUpdateNotification() {
                     console.error('Error showing notification:', error);
                 });
         } else {
-            self.registration.showUpdateNotification(title, options).then(function (notification) {
+            self.registration.Notification(title, options).then(function (notification) {
                 // Handle the button click
                 notification.addEventListener("notificationclick", function (event) {
                     if (event.action === "reboot") {
@@ -80,9 +78,7 @@ function showUpdateNotification() {
                         // For example, you can reload the page or execute a reboot command.
                         // window.location.reload(); // Reload the page
                         // Send a message to the PWA's helper script to trigger the reboot.
-                        if (ws) {
-                            ws.send("reboot");
-                        }
+                        ws.send("reboot");
                     }
                 });
             });
