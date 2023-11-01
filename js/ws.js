@@ -51,54 +51,59 @@ function showUpdateNotification() {
         ];
 
         if (typeof Window !== 'undefined') {
-            navigator.serviceWorker.ready
-                .then(sw => {
-                    console.log("Service Worker is ready.");
-                    sw.showNotification(title, options).then(function (notification) {
-                        console.log("Notification shown.");
-                        // Handle the button click
-                        notification.addEventListener("notificationclick", function (event) {
-                            if (event.action === "reboot") {
-                                console.log("Reboot button clicked.");
-                                // Add your reboot logic here
-                                // For example, you can reload the page or execute a reboot command.
-                                // window.location.reload(); // Reload the page
-                                // Send a message to the PWA's helper script to trigger the reboot.
-                                reboot();
-                                if (ws) {
-                                    console.log("Sending reboot command to ws.");
-                                    ws.send("reboot");
-                                }
+    navigator.serviceWorker.ready
+        .then(sw => {
+            sw.showNotification(title, options)
+                .then(function (notification) {
+                    // Handle the button click
+                    notification.addEventListener("notificationclick", function (event) {
+                        console.log("Button clicked. Event action: " + event.action);
+                        if (event.action === "reboot") {
+                            console.log("Reboot button clicked.");
+                            // Add your reboot logic here
+                            // For example, you can reload the page or execute a reboot command.
+                            // window.location.reload(); // Reload the page
+                            // Send a message to the PWA's helper script to trigger the reboot.
+                            reboot();
+                            if (ws) {
+                                console.log("Sending reboot command to ws.");
+                                ws.send("reboot");
                             }
-                        });
+                        }
                     });
                 })
                 .catch(error => {
                     console.error('Error showing notification:', error);
                 });
-        } else {
-            console.error('Service Worker is not available.');
-            self.registration.showNotification(title, options).then(function (notification) {
-                console.log("Notification shown.");
-                // Handle the button click
-                self.addEventListener("notificationclick", function (event) {
-                    if (event.action === "reboot") {
-                        console.log("Reboot button clicked.");
-                        // Add your reboot logic here
-                        // For example, you can reload the page or execute a reboot command.
-                        // window.location.reload(); // Reload the page
-                        // Send a message to the PWA's helper script to trigger the reboot.
-                        reboot();
-                        if (ws) {
-                            console.log("Sending reboot command to ws.");
-                            ws.send("reboot");
-                        }
+        })
+        .catch(error => {
+            console.error('Error with service worker:', error);
+        });
+} else {
+    self.registration.showNotification(title, options)
+        .then(function (notification) {
+            // Handle the button click
+            notification.addEventListener("notificationclick", function (event) {
+                console.log("Button clicked. Event action: " + event.action);
+                if (event.action === "reboot") {
+                    console.log("Reboot button clicked.");
+                    // Add your reboot logic here
+                    // For example, you can reload the page or execute a reboot command.
+                    // window.location.reload(); // Reload the page
+                    // Send a message to the PWA's helper script to trigger the reboot.
+                    reboot();
+                    if (ws) {
+                        console.log("Sending reboot command to ws.");
+                        ws.send("reboot");
                     }
-                });
+                }
             });
-        }
-    }
+        })
+        .catch(error => {
+            console.error('Error showing notification:', error);
+        });
 }
+
 
 
 function ws_connect() {
