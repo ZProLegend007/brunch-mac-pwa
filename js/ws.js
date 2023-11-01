@@ -53,24 +53,6 @@ function showUpdateNotification() {
                 type: "showUpdateNotification",
                 options: options,
             });
-                .then(function (notification) {
-                    // Handle the button click
-                    notification.addEventListener("notificationclick", function (event) {
-                        if (event.action === "reboot") {
-                            // Add your reboot logic here
-                            // For example, you can reload the page or execute a reboot command.
-                            // window.location.reload(); // Reload the page
-                            // Send a message to the PWA's helper script to trigger the reboot.
-                            reboot();
-                            if (ws) {
-                                ws.send("reboot");
-                            }
-                        }
-                    });
-                })
-                .catch(error => {
-                    console.error('Error showing notification:', error);
-                });
         }
     }
 }
