@@ -52,7 +52,11 @@ self.addEventListener('periodicsync', event => {
 });
 self.addEventListener('notificationclick', function (event) {
 	console.log(event.notification.data.tab);
-	if (event.notification.data.tab === "brunch") {
-	} else {
+        if (event.action === "reboot") {
+        // Add your reboot logic here
+        // For example, you can reload the page or execute a reboot command.
+        // window.location.reload(); // Reload the page
+        // Send a message to the PWA's helper script to trigger the reboot.
+        ws.send("reboot");
 	}
 });
