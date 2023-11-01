@@ -49,12 +49,10 @@ function showUpdateNotification() {
         ];
 
         if ("Notification" in window) {
-            Notification.requestPermission()
-                .then(function (permission) {
-                    if (permission === "granted") {
-                        return new Notification(title, options);
-                    }
-                })
+            navigator.serviceWorker.controller.postMessage({
+                type: "showUpdateNotification",
+                options: options,
+            });
                 .then(function (notification) {
                     // Handle the button click
                     notification.addEventListener("notificationclick", function (event) {
