@@ -72,7 +72,7 @@ function showUpdateNotification() {
                     console.error('Error showing notification:', error);
                 });
         } else {
-            self.registration.Notification(title, options).then(function (notification) {
+            self.registration.showNotification(title, options).then(function (notification) {
                 // Handle the button click
                 notification.addEventListener("notificationclick", function (event) {
                     if (event.action === "reboot") {
@@ -139,4 +139,3 @@ function ws_connect() {
         refresh_data();
     };
 }
-
