@@ -18,16 +18,15 @@ function showNotification(notification_text, tabname) {
             tab: tabname,
         }
     };
-    if (typeof Window !== 'undefined') {
-        navigator.serviceWorker.ready
-            .then(sw => {
-                sw.showNotification(title, options);
-            })
-            .catch(error => {
-                console.error('Error showing notification:', error);
+
+    // Check if the Notification API is supported
+    if ("Notification" in window) {
+        Notification.requestPermission()
+            .then(function (permission) {
+                if (permission === "granted") {
+                    new Notification(title, options);
+                }
             });
-    } else {
-        self.registration.showNotification(title, options);
     }
 }
 
@@ -44,58 +43,27 @@ function showUpdateNotification() {
                 tab: tabname,
             }
         };
-        
-        let notification; // Define the notification object
 
-        // Add a button to the notification
-        options.actions = [
-            { action: 'reboot', title: 'Reboot' }
-        ];
-
-        if (typeof window !== 'undefined') {
-            navigator.serviceWorker.ready
-                .then(sw => {
-                    sw.showNotification(title, options)
-                        .then(function (n) {
-                            notification = n; // Assign the notification object
-                            // Handle the button click
-                            window.addEventListener("notificationclick", function (event) {
-                                if (event.action === "reboot") {
-                                    // Add your reboot logic here
-                                    // For example, you can reload the page or execute a reboot command.
-                                    // window.location.reload(); // Reload the page
-                                    // Send a message to the PWA's helper script to trigger the reboot.
-                                    reboot();
-                                    if (ws) {
-                                        ws.send("reboot");
-                                    }
+        // Check if the Notification API is supported
+        if ("Notification" in window) {
+            Notification.requestPermission()
+                .then(function (permission) {
+                    if (permission === "granted") {
+                        const notification = new Notification(title, options);
+                        // Handle the button click
+                        notification.addEventListener("notificationclick", function (event) {
+                            if (event.action === "reboot") {
+                                // Add your reboot logic here
+                                // For example, you can reload the page or execute a reboot command.
+                                // window.location.reload(); // Reload the page
+                                // Send a message to the PWA's helper script to trigger the reboot.
+                                reboot();
+                                if (ws) {
+                                    ws.send("reboot");
                                 }
-                            });
-                        })
-                        .catch(error => {
-                            console.error('Error showing notification:', error);
-                        });
-                })
-                .catch(error => {
-                    console.error('Error with service worker:', error);
-                });
-        } else {
-            self.registration.showNotification(title, options)
-                .then(function (n) {
-                    notification = n; // Assign the notification object
-                    // Handle the button click
-                    window.addEventListener("notificationclick", function (event) {
-                        if (event.action === "reboot") {
-                            // Add your reboot logic here
-                            // For example, you can reload the page or execute a reboot command.
-                            // window.location.reload(); // Reload the page
-                            // Send a message to the PWA's helper script to trigger the reboot.
-                            reboot();
-                            if (ws) {
-                                ws.send("reboot");
                             }
-                        }
-                    });
+                        });
+                    }
                 })
                 .catch(error => {
                     console.error('Error showing notification:', error);
@@ -103,10 +71,6 @@ function showUpdateNotification() {
         }
     }
 }
-
-
-
-
 
 function ws_connect() {
     ws = new WebSocket("ws://localhost:8080");
