@@ -57,6 +57,8 @@ self.addEventListener('notificationclick', function (event) {
         // For example, you can reload the page or execute a reboot command.
         // window.location.reload(); // Reload the page
         // Send a message to the PWA's helper script to trigger the reboot.
-        ws.send("reboot");
+        	if (ws) {
+                	ws.send("reboot");
+                }
 	}
 });
