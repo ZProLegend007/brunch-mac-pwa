@@ -50,3 +50,9 @@ self.addEventListener('periodicsync', event => {
 		event.waitUntil(getversion());
 	}
 });
+self.addEventListener('notificationclick', function (event) {
+	console.log(event.notification.data.tab);
+	if (event.notification.data.tab === "brunch") {
+	} else {
+	}
+});
