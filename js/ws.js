@@ -71,16 +71,13 @@ function showUpdateNotification() {
             navigator.serviceWorker.ready
                 .then(sw => {
                     sw.showNotification(title, options).then(function (notification) {
-                    }
+                    });
                 }
                 .catch(error => {
                     console.error('Error showing notification:', error);
                 });
         } else {
             self.registration.showNotification(title, options).then(function (notification) {
-                // Handle the button click
-                notification.addEventListener("notificationclick", function (event) {
-                }
             }
         }
     }
