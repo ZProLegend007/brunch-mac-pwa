@@ -57,7 +57,7 @@ function showUpdateNotification() {
   	          .then(sw => {
   	              sw.showNotification(title, options);
   	          })
-    	        });
+    	        }
  	   } else {
    	     self.registration.showNotification(title, options);
 	    }
