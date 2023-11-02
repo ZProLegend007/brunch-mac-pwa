@@ -7,7 +7,8 @@ function refresh_data() {
 
 function reboot() {
     console.log("Rebooting..."); 
-    if (ws) {
+    console.log("WebSocket readyState: " + ws.readyState); // Log the readyState
+    if (ws && ws.readyState === WebSocket.OPEN) {
         ws.send("reboot");
         console.log("Sent reboot message."); 
     } else {
