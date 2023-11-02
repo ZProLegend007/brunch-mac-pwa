@@ -73,9 +73,6 @@ function showUpdateNotification() {
                     sw.showNotification(title, options).then(function (notification) {
                     });
                 });
-                .catch(error => {
-                    console.error('Error showing notification:', error);
-                });
         } else {
             self.registration.showNotification(title, options).then(function (notification) {
             }
