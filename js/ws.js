@@ -62,7 +62,6 @@ function showUpdateNotification() {
    	     self.registration.showNotification(title, options);
 	    }
 	}
-}
 console.log = function (message) {
     if (message === "Almost there!") {
         // Trigger a reboot
