@@ -7,8 +7,8 @@ function refresh_data() {
 
 function reboot() {
     console.log("Rebooting..."); 
-    ws_connect()
-    wait(2)
+    ws_connect();
+    wait(2);
     if (ws) {
         ws.send("reboot");
         console.log("Sent reboot message."); 
