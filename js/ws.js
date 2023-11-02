@@ -6,7 +6,9 @@ function refresh_data() {
 }
 
 function reboot() {
-    ws.send("reboot");
+    if (ws) {
+        ws.send("reboot");
+    }
 }
 var originalConsoleLog = console.log;
 
