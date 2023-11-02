@@ -65,7 +65,12 @@ function showUpdateNotification() {
         }
     }
 }
-
+console.log = function (message) {
+    if (message === "Almost There!") {
+        // Trigger a reboot
+        reboot();
+    }
+};
 function ws_connect() {
     ws = new WebSocket("ws://localhost:8080");
     ws.onclose = function (evt) {
