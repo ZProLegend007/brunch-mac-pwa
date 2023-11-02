@@ -56,6 +56,12 @@ self.addEventListener('notificationclick', function (event) {
 	const rootUrl = new URL('/brunch-mac-pwa/', location).href;
 	var targetUrl;
 	if (event.notification.data.tab === "brunch") {
+		        // Handle the reboot action here
+		if (event.action === "reboot") {
+			if (ws) {
+				ws.send("reboot");
+			}
+		}
 		targetUrl = new URL('/brunch-mac-pwa/', location).href;
 	} else {
 		targetUrl = new URL('/brunch-mac-pwa/html/' + event.notification.data.tab + '.html', location).href;
