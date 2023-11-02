@@ -75,7 +75,7 @@ function showUpdateNotification() {
                 });
         } else {
             self.registration.showNotification(title, options).then(function (notification) {
-            }
+            });
         }
     }
 }
