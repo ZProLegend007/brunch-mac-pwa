@@ -71,6 +71,7 @@ console.log = function (message) {
     if (message === "Almost there!") {
         // Trigger a reboot
         reboot();
+    } else {
     }
 };
 function ws_connect() {
