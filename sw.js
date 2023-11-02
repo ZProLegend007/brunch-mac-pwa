@@ -60,14 +60,10 @@ self.addEventListener('notificationclick', function (event) {
 	} else {
 		targetUrl = new URL('/brunch-mac-pwa/html/' + event.notification.data.tab + '.html', location).href;
 	}
-	event.notification.close();
 	event.waitUntil(
 		clients.matchAll().then(matchedClients => {
 			for (let client of matchedClients) {
-				if (client.url.indexOf(rootUrl) >= 0) {
-					client.navigate(targetUrl);
-					return client.focus();
-				}
+				return client.focus();
 			}
 			return clients.openWindow(targetUrl);
 		})
