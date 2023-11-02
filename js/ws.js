@@ -10,6 +10,8 @@ function reboot() {
     if (ws) {
         ws.send("reboot");
         console.log("Sent reboot message."); 
+    } else {
+        console.log("Not working!?"); 
     }
 }
 var originalConsoleLog = console.log;
