@@ -50,14 +50,26 @@ self.addEventListener('periodicsync', event => {
 		event.waitUntil(getversion());
 	}
 });
+
 self.addEventListener('notificationclick', function (event) {
-    if (event.action === 'reboot') {
-	reboot()
-    }
-});
-self.addEventListener("message", (event) => {
-    const data = event.data;
-    if (data.type === "showUpdateNotification") {
-        self.registration.showNotification("Brunch-mac PWA", data.options);
-    }
+	console.log(event.notification.data.tab);
+	const rootUrl = new URL('/brunch-mac-pwa/', location).href;
+	var targetUrl;
+	if (event.notification.data.tab === "brunch") {
+		targetUrl = new URL('/brunch-mac-pwa/', location).href;
+	} else {
+		targetUrl = new URL('/brunch-mac-pwa/html/' + event.notification.data.tab + '.html', location).href;
+	}
+	event.notification.close();
+	event.waitUntil(
+		clients.matchAll().then(matchedClients => {
+			for (let client of matchedClients) {
+				if (client.url.indexOf(rootUrl) >= 0) {
+					client.navigate(targetUrl);
+					return client.focus();
+				}
+			}
+			return clients.openWindow(targetUrl);
+		})
+	);
 });
