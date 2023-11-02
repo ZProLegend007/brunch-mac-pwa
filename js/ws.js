@@ -6,9 +6,7 @@ function refresh_data() {
 }
 
 function reboot() {
-	if (ws) {
-		ws.send("reboot");
-	}
+    ws.send("reboot");
 }
 
 function showNotification(notification_text, tabname) {
@@ -20,7 +18,7 @@ function showNotification(notification_text, tabname) {
             tab: tabname,
         }
     };
-    if (typeof window !== 'undefined') {
+    if (typeof Window !== 'undefined') {
         navigator.serviceWorker.ready
             .then(sw => {
                 sw.showNotification(title, options);
@@ -52,23 +50,46 @@ function showUpdateNotification() {
             { action: 'reboot', title: 'Reboot' }
         ];
 
-	    if (typeof window !== 'undefined') {
- 	       navigator.serviceWorker.ready
-  	          .then(sw => {
-  	              sw.showNotification(title, options);
-  	          })
-    	        }
- 	   } else {
-   	     self.registration.showNotification(title, options);
-	    }
-	}
-console.log = function (message) {
-    if (message === "Almost there!") {
-        // Trigger a reboot
-        reboot();
-    } else {
+        if (typeof Window !== 'undefined') {
+            navigator.serviceWorker.ready
+                .then(sw => {
+                    sw.showNotification(title, options).then(function (notification) {
+                        // Handle the button click
+                        notification.addEventListener("notificationclick", function (event) {
+                            if (event.action === "reboot") {
+                                // Add your reboot logic here
+                                // For example, you can reload the page or execute a reboot command.
+                                // window.location.reload(); // Reload the page
+                                // Send a message to the PWA's helper script to trigger the reboot.
+                                if (ws) {
+                                    ws.send("reboot");
+                                }
+                            }
+                        });
+                    });
+                })
+                .catch(error => {
+                    console.error('Error showing notification:', error);
+                });
+        } else {
+            self.registration.showNotification(title, options).then(function (notification) {
+                // Handle the button click
+                notification.addEventListener("notificationclick", function (event) {
+                    if (event.action === "reboot") {
+                        // Add your reboot logic here
+                        // For example, you can reload the page or execute a reboot command.
+                        // window.location.reload(); // Reload the page
+                        // Send a message to the PWA's helper script to trigger the reboot.
+                        if (ws) {
+                            ws.send("reboot");
+                        }
+                    }
+                });
+            });
+        }
     }
-};
+}
+
 function ws_connect() {
     ws = new WebSocket("ws://localhost:8080");
     ws.onclose = function (evt) {
