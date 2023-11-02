@@ -56,16 +56,13 @@ self.addEventListener('notificationclick', function (event) {
 	const rootUrl = new URL('/brunch-mac-pwa/', location).href;
 	var targetUrl;
 	if (event.notification.data.tab === "brunch") {
-		targetUrl = new URL('/brunch-mac-pwa/', location).href;
 	} else {
-		targetUrl = new URL('/brunch-mac-pwa/html/' + event.notification.data.tab + '.html', location).href;
 	}
 	event.waitUntil(
 		clients.matchAll().then(matchedClients => {
 			for (let client of matchedClients) {
 				return client.focus();
 			}
-			return clients.openWindow(targetUrl);
 		})
 	);
 });
