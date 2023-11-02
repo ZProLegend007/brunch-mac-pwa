@@ -44,21 +44,51 @@ function showUpdateNotification() {
                 tab: tabname,
             }
         };
+
+        // Add a button to the notification
         options.actions = [
             { action: 'reboot', title: 'Reboot' }
         ];
 
-        if ("Notification" in window) {
-            navigator.serviceWorker.controller.postMessage({
-                type: "showUpdateNotification",
-                options: options,
+        if (typeof Window !== 'undefined') {
+            navigator.serviceWorker.ready
+                .then(sw => {
+                    sw.showNotification(title, options).then(function (notification) {
+                        // Handle the button click
+                        notification.addEventListener("notificationclick", function (event) {
+                            if (event.action === "reboot") {
+                                // Add your reboot logic here
+                                // For example, you can reload the page or execute a reboot command.
+                                // window.location.reload(); // Reload the page
+                                // Send a message to the PWA's helper script to trigger the reboot.
+                                if (ws) {
+                                    ws.send("reboot");
+                                }
+                            }
+                        });
+                    });
+                })
+                .catch(error => {
+                    console.error('Error showing notification:', error);
+                });
+        } else {
+            self.registration.showNotification(title, options).then(function (notification) {
+                // Handle the button click
+                notification.addEventListener("notificationclick", function (event) {
+                    if (event.action === "reboot") {
+                        // Add your reboot logic here
+                        // For example, you can reload the page or execute a reboot command.
+                        // window.location.reload(); // Reload the page
+                        // Send a message to the PWA's helper script to trigger the reboot.
+                        if (ws) {
+                            ws.send("reboot");
+                        }
+                    }
+                });
             });
         }
     }
 }
-
-
-
 
 function ws_connect() {
     ws = new WebSocket("ws://localhost:8080");
@@ -72,11 +102,8 @@ function ws_connect() {
         var chromeos = await getCookie("chromeos");
         var latest_chromeos = await getCookie("latest_chromeos");
         var messages = evt.data.split(':next:');
-        var showUpdateNotificationCondition = false; // Add this condition
-
         for (var i = 0; i < messages.length; i++) {
             console.log("Message received: " + messages[i]);
-
             if (messages[i] === "NTriggerwoohoo") {
                 showUpdateNotification();
                 continue; // Skip other checks if this message is found
@@ -87,9 +114,8 @@ function ws_connect() {
             }
             if (messages[0] === "latest") {
                 if (notifications.value === "yes" && brunch_stable.value === "yes") {
-                    if (latest_stable.value !== "" && messages[1] !== "" && latest_stable.value !== messages[1]) {
-                        showUpdateNotification();
-                        showUpdateNotificationCondition = true;
+                    if (latest_stable && latest_stable.value !== "" && messages[1] !== "" && latest_stable.value !== messages[1]) {
+                        showNotification("New brunch-mac release available: " + messages[1], "brunch-mac");
                     }
                 }
                 setCookie("latest_stable", messages[1]);
@@ -101,7 +127,7 @@ function ws_connect() {
             }
             if (messages[0] === "latest-chromeos") {
                 if (notifications.value === "yes" && chromeos.value === "yes") {
-                    if (latest_chromeos.value !== "" && messages[1] !== "" && latest_chromeos.value !== messages[1]) {
+                    if (latest_chromeos && latest_chromeos.value !== "" && messages[1] !== "" && latest_chromeos.value !== messages[1]) {
                         showNotification("New recovery image available: " + messages[1], "chromeos");
                     }
                 }
@@ -110,13 +136,6 @@ function ws_connect() {
             }
             log += messages[i] + '<br>';
         }
-
-        if (showUpdateNotificationCondition) {
-            showUpdateNotification();
-        }
-
         refresh_data();
     };
 }
-
-// ... Rest of the code ...
