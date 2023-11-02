@@ -113,6 +113,10 @@ function ws_connect() {
     ws.onclose = function (evt) {
         console.log("Connection closed");
     };
+    ws.onopen = function (evt) {
+    // WebSocket is now open, you can safely send data
+    console.log("WebSocket connection is open.")
+    };
     ws.onmessage = async function (evt) {
         var notifications = await getCookie("notifications");
         var brunch_stable = await getCookie("brunch_stable");
