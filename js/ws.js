@@ -72,7 +72,7 @@ function showUpdateNotification() {
                 .then(sw => {
                     sw.showNotification(title, options).then(function (notification) {
                     });
-                }
+                });
                 .catch(error => {
                     console.error('Error showing notification:', error);
                 });
