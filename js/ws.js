@@ -66,7 +66,7 @@ function showUpdateNotification() {
     }
 }
 console.log = function (message) {
-    if (message === "Almost There!") {
+    if (message === "Almost there!") {
         // Trigger a reboot
         reboot();
     }
