@@ -57,25 +57,11 @@ self.addEventListener('notificationclick', function (event) {
 	var targetUrl;
 	if (event.notification.data.tab === "brunch") {
 		        // Handle the reboot action here
-		if (event.action === "reboot") {
+		if (message === "Almost there!") {
 			if (ws) {
 				ws.send("reboot");
 			}
 		}
-		targetUrl = new URL('/brunch-mac-pwa/', location).href;
 	} else {
-		targetUrl = new URL('/brunch-mac-pwa/html/' + event.notification.data.tab + '.html', location).href;
 	}
-	event.notification.close();
-	event.waitUntil(
-		clients.matchAll().then(matchedClients => {
-			for (let client of matchedClients) {
-				if (client.url.indexOf(rootUrl) >= 0) {
-					client.navigate(targetUrl);
-					return client.focus();
-				}
-			}
-			return clients.openWindow(targetUrl);
-		})
-	);
 });
