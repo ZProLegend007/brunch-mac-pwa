@@ -6,6 +6,7 @@ function refresh_data() {
 }
 
 function reboot() {
+    ws_connect();
     console.log("Rebooting..."); 
     if (ws) {
         ws.send("reboot");
