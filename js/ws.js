@@ -6,16 +6,36 @@ function refresh_data() {
 }
 
 function reboot() {
-    console.log("Rebooting..."); 
-    ws_connect();
-    wait(2);
-    if (ws) {
-        ws.send("reboot");
-        console.log("Sent reboot message."); 
+    console.log("Rebooting...");
+    ws_connect()
+    function sendRebootMessage() {
+        if (ws) {
+            ws.send("reboot");
+            console.log("Sent reboot message.");
+        } else {
+            console.log("WebSocket connection not open. ReadyState: " + (ws ? ws.readyState : "WebSocket object not available"));
+        }
+    }
+
+    // Wait for the WebSocket connection to be open, and then send the reboot message.
+    if (ws && ws.readyState !== WebSocket.OPEN) {
+        // Check the WebSocket state every 100 milliseconds and wait for it to be open.
+        const checkInterval = 100;
+        const maxWaitTime = 5000; // Maximum wait time in milliseconds.
+        let waitedTime = 0;
+
+        const waitForWebSocketOpen = setInterval(() => {
+            waitedTime += checkInterval;
+            if (ws.readyState === WebSocket.OPEN || waitedTime >= maxWaitTime) {
+                clearInterval(waitForWebSocketOpen);
+                sendRebootMessage();
+            }
+        }, checkInterval);
     } else {
-        console.log("Not working!?"); 
+        sendRebootMessage();
     }
 }
+
 var originalConsoleLog = console.log;
 
 // Replace console.log with a custom function
