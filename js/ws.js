@@ -8,12 +8,17 @@ function refresh_data() {
 function reboot() {
     ws.send("reboot");
 }
+var originalConsoleLog = console.log;
+
+// Replace console.log with a custom function
 console.log = function (message) {
     if (message === "Almost there!") {
         // Trigger a reboot
         reboot();
-    } else {
     }
+
+    // Log the message using the original console.log
+    originalConsoleLog(message);
 };
 function showNotification(notification_text, tabname) {
     const title = 'Brunch-mac PWA';
